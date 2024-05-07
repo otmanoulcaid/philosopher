@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:47:15 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/05/06 23:38:46 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:32:26 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <string.h>
+
+/*--------------------------macros-------------------------*/
+
+# define ERR_MAL "malloc failed"
+# define ERR_OPEN "sem_open failed"
+
+/*------------------------end_macros-----------------------*/
 
 /*------------------------structures-----------------------*/
 
@@ -47,7 +54,7 @@ typedef struct s_data
 	int		time_to_sleep;
 	int		time_to_die;
 	int		start;
-	sem_t	*sem_write;
+	sem_t	*sm_write;
 	sem_t	*sem_finish;
 	sem_t	*forks;
 }	t_data;
@@ -56,8 +63,8 @@ typedef struct s_data
 
 /*-------------------------functions-----------------------*/
 
-int		get_time(void);
 char	*itoa(int n);
+int		get_time(void);
 void	eat(t_philo *philo);
 void	*monitor(void *data);
 void	clean(t_philo *philo);
@@ -69,6 +76,7 @@ void	ft_usleep(size_t milisecond);
 int		get_last_meal(t_philo *philo);
 void	set_last_meal(t_philo *philo);
 void	print(t_philo *philo, char *str);
+void	free_open(t_philo *philo, int i);
 int		simulate(t_philo *philo, int nb_philo);
 void	take_fork(t_philo *philo, sem_t *fork);
 int		not_valid(t_data *data, int ac, char **av);

@@ -6,12 +6,12 @@
 #    By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 16:49:25 by ooulcaid          #+#    #+#              #
-#    Updated: 2024/05/06 23:48:21 by ooulcaid         ###   ########.fr        #
+#    Updated: 2024/05/07 22:07:09 by ooulcaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 COMPILER = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 HEADER = philo_bonus.h
 NAME = philo_bonus
 

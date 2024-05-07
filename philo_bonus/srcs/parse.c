@@ -6,11 +6,27 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:49:35 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/05/06 22:45:50 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:31:26 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_bonus.h"
+
+void	free_open(t_philo *philo, int i)
+{
+	int		j;
+	char	*str;
+
+	j = -1;
+	while (++j < i)
+	{
+		str = itoa(i);
+		if (!str)
+			return (printf(ERR_MAL), exit(EXIT_FAILURE));
+		(sem_close(philo[i].sem_last_meal), sem_unlink(str));
+		free(str);
+	}
+}
 
 int	not_valid(t_data *data, int ac, char **av)
 {
@@ -68,16 +84,22 @@ t_philo	*ft_init_philo(t_data *data)
 
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->nb_philo);
 	if (!philo)
-		return (printf("Error Malloc"), NULL);
+		return (printf(ERR_MAL), NULL);
 	i = -1;
 	while (++i < data->nb_philo)
 	{
 		str = itoa(i);
+		if (!str)
+			(free_open(philo, i - 1), free(philo), exit(EXIT_FAILURE));
 		sem_unlink(str);
 		philo[i].sem_last_meal = sem_open(str, O_CREAT, 0644, 1);
+		if (!philo[i].sem_last_meal)
+			(free_open(philo, i - 1), free(philo), free(str), \
+			exit(EXIT_FAILURE));
 		philo[i].id = i + 1;
 		philo[i].data = data;
 		philo[i].eaten_meals = 0;
+		free(str);
 	}
 	return (philo);
 }
@@ -91,11 +113,19 @@ t_philo	*ft_init_data(t_data *data, int ac, char **av)
 	else
 		data->meals = -1;
 	sem_unlink("sem_forks");
-	sem_unlink("sem_write");
+	sem_unlink("sm_write");
 	sem_unlink("sem_finish");
 	data->forks = sem_open("sem_forks", O_CREAT, 664, data->nb_philo);
-	data->sem_write = sem_open("sem_write", O_CREAT, 664, 1);
+	if (!data->forks)
+		(printf(ERR_OPEN), exit(EXIT_FAILURE));
+	data->sm_write = sem_open("sm_write", O_CREAT, 664, 1);
+	if (!data->sm_write)
+		(printf(ERR_OPEN), sem_close(data->forks), \
+		sem_unlink("sem_forks"), exit(EXIT_FAILURE));
 	data->sem_finish = sem_open("sem_finish", O_CREAT, 664, 0);
+	if (!data->sem_finish)
+		(sem_unlink("sem_finish"), sem_unlink("sem_forks"), printf(ERR_OPEN), \
+		sem_close(data->sm_write), sem_close(data->forks), exit(EXIT_FAILURE));
 	philo = ft_init_philo(data);
 	if (!philo)
 		return (clean(philo), NULL);

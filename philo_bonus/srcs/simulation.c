@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:24:38 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/05/07 19:00:57 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:30:22 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	simulate(t_philo *philo, int nb_philo)
 	}
 	if (pthread_create(&thread, NULL, &monitor, philo))
 	{
-		(sem_unlink("sem_forks"), sem_unlink("sem_write"));
+		(sem_unlink("sem_forks"), sem_unlink("sm_write"));
 		return (printf("Error pthread\n"), 0);
 	}
 	return (1);

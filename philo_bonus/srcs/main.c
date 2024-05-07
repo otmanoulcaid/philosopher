@@ -6,11 +6,16 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:49:38 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/05/06 23:50:04 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:32:36 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_bonus.h"
+
+void	check(void)
+{
+	system("leaks philo_bonus");
+}
 
 int	main(int ac, char **av)
 {
@@ -18,6 +23,7 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_philo	*philo;
 
+	atexit(check);
 	if (not_valid(&data, ac - 1, av + 1))
 		return (1);
 	philo = ft_init_data(&data, ac - 1, av + 1);
@@ -28,11 +34,5 @@ int	main(int ac, char **av)
 	i = -1;
 	while (++i < data.nb_philo)
 		waitpid(philo[i].pid, NULL, 0);
-	return (clean(philo), 0);
+	return (free_open(philo, data.nb_philo), clean(philo), 0);
 }
-
-	// atexit(check);
-// void	check(void)
-// {
-// 	system("lsof -c philo_bonus");
-// }
