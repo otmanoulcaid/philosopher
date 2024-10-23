@@ -2,17 +2,17 @@
 
 ## Introduction
 
-Welcome to the 42 Philosopher Project! This project aims to simulate the classic dining philosophers problem using a concurrent programming approach. The dining philosophers problem is an illustration of a synchronization issue in computer science, where multiple processes compete for shared resources and must avoid deadlock or starvation.
+Welcome to Philosopher Project! This project aims to simulate the classic dining philosophers problem using a concurrent programming approach. The dining philosophers problem is an illustration of a synchronization issue in computer science, where multiple processes compete for shared resources and must avoid deadlock or starvation.
 
 This README provides a detailed overview of the project, including its requirements and some usage guidelines.
 
-The 42 Philosopher Project is implemented in the C programming language and utilizes multi-threading to simulate the dining philosophers problem. The goal is to model a scenario where a fixed number of philosophers sit at a round table with bowls of spaghetti and forks. The philosophers alternate between thinking and eating, using the forks placed on either side of their position.
+The Philosopher Project is implemented in the C programming language and utilizes multi-threading to simulate the dining philosophers problem. The goal is to model a scenario where a fixed number of philosophers sit at a round table with bowls of spaghetti and forks. The philosophers alternate between thinking and eating, using the forks placed on either side of their position.
 
 The challenge lies in preventing deadlocks, where philosophers end up waiting indefinitely for the forks they need, and in avoiding starvation, where a philosopher never gets a chance to eat. This project aims to tackle these issues through the implementation of a solution that employs proper synchronization techniques.
 
 ## Project Requirements
 
-To run the 42 Philosopher Project, you will need:
+To run the Philosopher Project, you will need:
 
 - C Compiler (e.g., gcc)
 - POSIX Threads (pthreads) library
@@ -34,43 +34,43 @@ The project follows a multi-threaded architecture to simulate the dining philoso
 
 ## Installation
 
-Follow these steps to install and run the 42 Philosopher Project:
+Follow these steps to install and run the Philosopher Project:
 
 1. Clone the project repository.
-2. 
-3. Navigate to the project directory.
-4. 
-5. Compile the source code using your preferred C compiler:
+
+2. Navigate to the project directory. 
+
+3. Compile the source code using make:
 
    ```
    make 
    ```
 
-6. The project is now ready to be executed.
+4. The project is now ready to be executed.
 
 ## Usage
 
-To execute the 42 Philosopher Project, follow these steps:
+To execute the Philosopher Project, follow these steps:
 
 1. Open a terminal or command prompt.
 
 2. Navigate to the project directory:
-3. 
-4. Run the compiled executable:
+
+3. Run the compiled executable:
 
    ```
    ./philo
    ```
 
-5. The simulation will start, and you will see the philosophers performing their actions (thinking and eating and sleeping) in the output.
+4. The simulation will start, and you will see the philosophers performing their actions (thinking and eating and sleeping) in the output.
 
-6. To terminate the program, press `Ctrl + C` in
+5. To terminate the program, press `Ctrl + C` in
 
  the terminal.
 
 ## Design Decisions
 
-The 42 Philosopher Project makes several design decisions to address the dining philosophers problem effectively. These decisions include:
+The Philosopher Project makes several design decisions to address the dining philosophers problem effectively. These decisions include:
 
 - Implementing a mutex lock for each fork to allow only one philosopher to hold a fork at a time.
 - Introducing a maximum number of allowed philosophers to prevent resource exhaustion.
